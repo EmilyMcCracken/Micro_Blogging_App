@@ -2,6 +2,7 @@
 This is a group assignment to create a micro-blogging app with multiple user functions
 
 Assignment Criteria:
+
 Building a Micro-blogging App
 
 As an awesome exercise, you'll be building a micro-blogging app in a group of two.
@@ -15,23 +16,26 @@ Requirements for the app are as follows.
 A user should be able to:
 
 sign up
-sign in
-sign out
-edit their account details
-delete their account
-post micro-blogs (posts with less than 150 characters)
-see a profile page with all of their account details and micro-blog posts to date
-visit other users' profile pages
-see a page with the 10 most recent posts (the "feed")
-follow other users (wait for help from your instructor)
-see a list of users they follow
-Advanced functionality, if you have time, could include:
 
-a user can upload a profile picture (checkout the Paperclip gem)
-a user can follow another user without leaving the page they're on (look into JQuery/AJAX)
-a post can include an uploaded photo posts with links automatically get converted into actual links
-ability to create groups of users, for other users to follow a bunch of users at the same time
-Your project should look good, don't make the front-end bare-bones. Feel free to use JavaScript for awesome front-end interactions! Good luck, have fun, and learn a lot! You have until the end of class on Friday for class time as well as the weekend if you'd like to make any final tweaks before your project is submitted.
+sign in
+
+sign out
+
+edit their account details
+
+delete their account
+
+post micro-blogs (posts with less than 150 characters)
+
+see a profile page with all of their account details and micro-blog posts to date
+
+visit other users' profile pages
+
+see a page with the 10 most recent posts (the "feed")
+
+follow other users (wait for help from your instructor)
+
+see a list of users they follow
 
 ------------------------------------------------------------------------------------------------------------------
 
