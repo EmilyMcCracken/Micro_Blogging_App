@@ -1,0 +1,15 @@
+nav {
+   position: fixed;
+   text-align: center;
+}
+
+body {
+	font-family: helvetica;
+	margin-left: 375px;
+	background-color: #9e9e9e
+}
+
+.signup {
+	border: 10px #ffffff;
+	padding: 25px;
+}

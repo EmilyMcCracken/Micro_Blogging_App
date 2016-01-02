@@ -12,27 +12,40 @@ get '/' do
 	@title = 'Home'
 	erb :home
 end
+
+get '/sign_in' do
+	erb :sign_in
+end
+
+get '/sign_up' do
+	erb :sign_up
+end
+
+get '/profile' do
+	erb :profile
+end
+
 post '/login' do
 	@title = 'Login'
 	@user = User.where(username: params[:username]).first
 
 	if @user.nil?
 		flash[:alert] = 'Bad News!'
-		redirect '/failed'
+		redirect '/sign_in_failed'
 	else
 		if @user.password == params[:password]
 			flash[:notice] = 'Congratulations!'
 			session[:session_userid] = @user.id
 			session[:session_username] = @user.username
-			redirect '/login_success'
+			redirect 'login_success'
 		else
-			redirect '/failed'
+			redirect '/sign_in_failed'
 		end
 	end
 end
 
-post '/signup' do
-	@title = 'Signup'
+post '/sign_up' do
+	@title = 'success'
 	@user = User.where(username: params[:username]).first
 	if @user.nil?
 			@user = User.create(username: params[:username], password: params[:password])
@@ -40,20 +53,22 @@ post '/signup' do
 			flash[:notice] = 'Congratulations!'
 			session[:session_user_id] = @user.id
 			session[:session_username] = @user.username
-			redirect 'login_success'
+			redirect '/success'
 	else
 		flash[:alert] = 'The username: #{params[:username] has been taken'
-		redirect '/failed'
+		redirect '/sign_up_failed'
 	end
 end
 
-get '/login_success' do
-	@title = 'You are signed in!'
-	# @followees = Follow.where(follower_id: session[:session_user_id])
-	erb :success
+get '/sign_in_failed' do
+	erb :sign_in_failed
 end
-get '/failed' do
-	@title = 'Login / Signup Failed'
-	flash[:alert] = 'Bad News!'
-	erb :home
+
+post '/login_success' do
+	erb :login_success
 end
+
+post '/success' do
+  erb :success 
+end
+
