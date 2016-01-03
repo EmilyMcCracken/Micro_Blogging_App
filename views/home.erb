@@ -1,20 +1,17 @@
 <title><%= @title %></title>
-
-<h1 class="message">Welcome to Dev!</h1>
-
-
+<img id="dev" src="./images/developer.jpg">
 <div class="feed">
+	<h1 class="welcome">Welcome to</h1>
+	<img id="logo_small" src="./images/Dev_logo.png">
 	<h1 class="feedheader">Here is what people are saying...</h1>
-	<h3 class="posts">Post</h3>
-	<h3 class="posts">Post</h3>
-	<h3 class="posts">Post</h3>
-	<h3 class="posts">Post</h3>
-	<h3 class="posts">Post</h3>
-	<h3 class="posts">Post</h3>
-	<h3 class="posts">Post</h3>
-	<h3 class="posts">Post</h3>
-	<h3 class="posts">Post</h3>
-	<h3 class="posts">Post</h3>
+	<% all_posts = [] %>
 
-
+	<% all_posts.each do |post| %>
+		<h3>Post</h3>
+	 	<p><%= post.message %></p>
+	 	<p><%= User.find(post.user_id).username %></p>
+	 	<p><%= post.date %></p>
+	 	<p><%= post.time %></p>
+	<% end %>
+</div>
 	

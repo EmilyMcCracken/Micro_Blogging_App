@@ -65,10 +65,42 @@ get '/sign_in_failed' do
 end
 
 post '/login_success' do
-	erb :login_success
+	@title = 'You are signed in!'
+	# @followees = Follow.where(follower_id: session[:session_user_id])
+	erb :success
 end
 
-post '/success' do
-  erb :success 
+get '/profile' do
+	@title = 'Your Profile'
+	@user = User.find(session[:session_user_id])
+	@my_profile = Profile.find_by(user_id: session[:session_user_id])
+	@posts = Post.where(user_id: session[:session_user_id])
+	erb :profile
+end
+
+# get '/edit' do
+# 	@title = 'Edit Your Profile'
+# 	@my_profile = Profile.find_by(user_id: session[:session_user_id])
+# 	erb :edit_profile
+# end
+
+# post '/edit_submit' do
+# 	@title = 'Your Profile'
+# 	@my_profile = Profile.find_by(user_id: session[:session_user_id])
+# 	@my_profile.update(first_name: params[:first_name].capitalize, last_name: params[:last_name].capitalize, birthday: params[:birthday], email: params[:email], work: params[:work].capitalize)
+# 	redirect 'profile'
+# end
+
+get '/sign_out' do
+	session.clear
+	erb :home
+end
+
+post '/post' do
+	@title = 'Your Profile'
+	if params[:post] != ""
+		Post.create(user_id: session[:session_user_id], content: params[:post])
+	end
+	redirect back
 end
 
