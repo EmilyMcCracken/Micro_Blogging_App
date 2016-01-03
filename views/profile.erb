@@ -1,3 +1,14 @@
-profile.erb
 
-<h1> PROFILE </h1>
+			<div class="profile_container">
+				<p>Hello <%= @User.profile.fname %>, how's your day going?</p>
+				<p>Here is your current account information:</p>
+				<p>Username: <%= @User.username %></p>
+				<p>User ID: <%= @User.id %></p>
+				<p>Email: <%= @User.email %></p>
+				<p>First Name: <%= @User.profile.fname %></p>
+				<p>Age: <%= @User.profile.city %></p>
+				<p>Last Name: <%= @User.profile.lname %></p>
+				<p>City: <%= @User.profile.birthday %></p>
+				<p>auto increment id from profile: <%= @currentUser.profile.id %></p>
+				<p>user_id in profile: <%= @User.profile.user_id %></p>
+			</div>
