@@ -1,18 +1,11 @@
 
-<% if session[:user_id] != nil %>
 	<div class="profile"> 
 		<p>Your Profile:</p>
-		<p>Username: <%= current_user.username %></p>
+		<p>Username: <%= @current_user.username %></p>
 		<p>Zipcode : <%= @current_user.zipcode %></p>
-		<p> First Name : <%= @current_user.profile.fname %></p>
-
-
-	
-		
+		<p>Zipcode : <%= @current_user.profile.fname %></p>	
 	</div>
-<% else %>
-		<p><%="No profile has been created for this user" %></p>
-<% end %>
+
 
 
 

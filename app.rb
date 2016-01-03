@@ -8,6 +8,8 @@ set :database, "sqlite3:micro_blog_db.sqlite3"
 
 require './models'
 
+# define current user and call it, so it can be used going forward for each session
+
 def current_user
   if session[:user_id]
     User.find(session[:user_id])  
@@ -23,7 +25,6 @@ def current_user
 end
 
 get '/' do
-	@title = 'Home'
 	erb :home
 end
 
@@ -35,16 +36,8 @@ get '/sign_up' do
 	erb :sign_up
 end
 
-
-
 post '/login' do
-	@title = 'Login'
 	@user = User.where(username: params[:username]).first
-
-	if @user.nil?
-		flash[:alert] = 'Bad News!'
-		redirect '/sign_in_failed'
-	else
 		if @user.password == params[:password]
 			flash[:notice] = 'Congratulations!'
 			session[:user_id] = @user.id
@@ -53,20 +46,21 @@ post '/login' do
 		else
 			redirect '/sign_in_failed'
 		end
-	end
 end
 
+
 post '/sign_up' do
-	@title = 'sign_up'
+	@user = User.where(username: params[:username]).first
 	if @user.nil?
-			User.create(username: params[:username], password: params[:password], email: params[:email], zipcode: params[:zipcode] )
-			flash[:notice] = 'Congratulations!'		
-			redirect '/edit_profile'
+		@user = User.create(username: params[:username], password: params[:password], email: params[:email], zipcode: params[:zipcode] )
+		flash[:notice] = 'Congratulations!'	
+		@profile = Profile.create(fname: params[:fname], city: params[:city], birthday: params[:birthday], lname: params[:lname])
+		@user.profile = @profile
+		redirect '/edit_profile'
 	else
 		flash[:alert] = 'The username: #{params[:username] has been taken'
 		redirect '/sign_up_failed'
 	end
-		@user = User.where(username: params[:username]).first
 		session[:user_id] = @user.id
 		current_user
 		redirect '/edit_profile'
@@ -85,16 +79,7 @@ get '/sign_in_failed' do
 end
 
 post '/login_success' do
-	@title = 'You are signed in!'
-	# @followees = Follow.where(follower_id: session[:session_user_id])
 	erb :success
-end
-
-get '/profile' do
-	@title = 'Your Profile'
-	@user = User.find(session[:user_id])
-	@posts = Post.where(user_id: session[:session_user_id])
-	erb :profile
 end
 
 
@@ -104,31 +89,32 @@ get '/sign_out' do
 end
 
 post '/post' do
-	@title = 'Your Profile'
 	if params[:post] != ""
 		Post.create(user_id: session[:session_user_id], content: params[:post])
 	end
 	redirect back
 end
 
+get '/profile' do
+	erb :profile
+end
 
+post '/profile' do
+	current_user
+	erb :profile
+end
 
 get '/edit_profile' do
 	erb :edit_profile
 end
 
 post '/edit_profile' do
-	@title = 'Edit Your Profile'
     current_user
-	Profile.create(fname: params[:fname], city: params[:city], birthday: params[:birthday], lname: params[:lname], user_id: "#{@current_user.id}")
+	current_user.profile.update(fname:params[:fname], lname:params[:lname], city:params[:city], birthday:params[:birthday])
 	erb :edit_profile
 end
 
 
 
-get '/profile' do
-	current_user
-	erb :profile
-end
 
 
