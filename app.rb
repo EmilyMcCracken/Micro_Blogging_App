@@ -8,6 +8,20 @@ set :database, "sqlite3:micro_blog_db.sqlite3"
 
 require './models'
 
+def current_user
+  if session[:user_id]
+    User.find(session[:user_id])  
+  else
+    nil
+  end
+end
+
+def current_user
+	if session[:user_id]
+		@current_user = User.find(session[:user_id])
+	end
+end
+
 get '/' do
 	@title = 'Home'
 	erb :home
@@ -33,9 +47,9 @@ post '/login' do
 	else
 		if @user.password == params[:password]
 			flash[:notice] = 'Congratulations!'
-			session[:session_userid] = @user.id
-			session[:session_username] = @user.username
-			redirect 'login_success'
+			session[:user_id] = @user.id
+			current_user
+			redirect '/profile'
 		else
 			redirect '/sign_in_failed'
 		end
@@ -43,19 +57,18 @@ post '/login' do
 end
 
 post '/sign_up' do
-	@title = 'success'
-	@user = User.where(username: params[:username]).first
+	@title = 'sign_up'
 	if @user.nil?
-			@user = User.create(username: params[:username], password: params[:password])
-			# @profile = Profile.create(email: params[:email], user_id: @user.id)
-			flash[:notice] = 'Congratulations!'
-			session[:session_user_id] = @user.id
-			session[:session_username] = @user.username
-			redirect '/success'
+			User.create(username: params[:username], password: params[:password], email: params[:email], zipcode: params[:zipcode] )
+			flash[:notice] = 'Congratulations!'		
 	else
 		flash[:alert] = 'The username: #{params[:username] has been taken'
 		redirect '/sign_up_failed'
 	end
+		@user = User.where(username: params[:username]).first
+		session[:user_id] = @user.id
+		current_user
+		redirect '/profile'
 end
 
 get '/sign_up_failed' do
@@ -78,24 +91,11 @@ end
 
 get '/profile' do
 	@title = 'Your Profile'
-	@user = User.find(session[:session_user_id])
-	@my_profile = Profile.find_by(user_id: session[:session_user_id])
+	@user = User.find(session[:user_id])
 	@posts = Post.where(user_id: session[:session_user_id])
 	erb :profile
 end
 
-# get '/edit' do
-# 	@title = 'Edit Your Profile'
-# 	@my_profile = Profile.find_by(user_id: session[:session_user_id])
-# 	erb :edit_profile
-# end
-
-# post '/edit_submit' do
-# 	@title = 'Your Profile'
-# 	@my_profile = Profile.find_by(user_id: session[:session_user_id])
-# 	@my_profile.update(first_name: params[:first_name].capitalize, last_name: params[:last_name].capitalize, birthday: params[:birthday], email: params[:email], work: params[:work].capitalize)
-# 	redirect 'profile'
-# end
 
 get '/sign_out' do
 	session.clear
@@ -118,18 +118,27 @@ end
 
 post '/edit_profile' do
 	@title = 'Edit Your Profile'
-    @user
+    current_user
 	Profile.create(fname: params[:name], city: params[:city], birthday: params[:birthday], lname: params[:lname], user_id: "#{@User.id}")
 	erb :edit_profile
+end
+
+post '/edit_profile' do
+	current_user
+	current_user.update(fname:params[:fname], lname:params[:lname], email:params[:email])
+	current_user.profile.update(bio:params[:bio], age:params[:age], location:params[:location])
+	redirect '/profile'
 end
 
 
 post '/profile' do
 	@title = 'Your Profile'
+	current_user
 	erb :profile
 end
 
 get '/profile' do
+	current_user
 	erb :profile
 end
 
