@@ -61,11 +61,7 @@ post '/sign_up' do
 	if @user.nil?
 			User.create(username: params[:username], password: params[:password], email: params[:email], zipcode: params[:zipcode] )
 			flash[:notice] = 'Congratulations!'		
-			@profile = Profile.create(email: params[:email], user_id: @user.id)
-			flash[:notice] = 'Congratulations!'
-			session[:user_id] = @user.id
-			session[:session_username] = @user.username
-			redirect '/success'
+			redirect '/edit_profile'
 	else
 		flash[:alert] = 'The username: #{params[:username] has been taken'
 		redirect '/sign_up_failed'
@@ -73,7 +69,7 @@ post '/sign_up' do
 		@user = User.where(username: params[:username]).first
 		session[:user_id] = @user.id
 		current_user
-		redirect '/profile'
+		redirect '/edit_profile'
 end
 
 get '/sign_up_failed' do
@@ -124,23 +120,11 @@ end
 post '/edit_profile' do
 	@title = 'Edit Your Profile'
     current_user
-	Profile.create(fname: params[:name], city: params[:city], birthday: params[:birthday], lname: params[:lname], user_id: "#{@User.id}")
+	Profile.create(fname: params[:fname], city: params[:city], birthday: params[:birthday], lname: params[:lname], user_id: "#{@current_user.id}")
 	erb :edit_profile
 end
 
-post '/edit_profile' do
-	current_user
-	current_user.update(fname:params[:fname], lname:params[:lname], email:params[:email])
-	current_user.profile.update(bio:params[:bio], age:params[:age], location:params[:location])
-	redirect '/profile'
-end
 
-
-post '/profile' do
-	@title = 'Your Profile'
-	current_user
-	erb :profile
-end
 
 get '/profile' do
 	current_user

@@ -2,13 +2,11 @@
 <% if session[:user_id] != nil %>
 	<div class="profile"> 
 		<p>Your Profile:</p>
-			<h1> CAN YOU SEE THIS? </h1>
-				<h1> CAN YOU SEE THIS? </h1>
-					<h1> CAN YOU SEE THIS? </h1>
-						<h1> CAN YOU SEE THIS? </h1>
-							<h1> CAN YOU SEE THIS? </h1>
 		<p>Username: <%= current_user.username %></p>
-		<p>Zipcode : <%= current_user.zipcode %></p>
+		<p>Zipcode : <%= @current_user.zipcode %></p>
+		<p> First Name : <%= @current_user.profile.fname %></p>
+
+
 	
 		
 	</div>
