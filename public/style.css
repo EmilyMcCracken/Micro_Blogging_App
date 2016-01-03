@@ -84,7 +84,7 @@ header {
 	text-align: center;
 }
 
-#login, #signup {
+#login, #signup, #edit_info {
 	border: solid #ff5722 4px;
 	width: 30%;
 	background-color: rgba(96, 125, 139, 0.6);

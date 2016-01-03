@@ -61,6 +61,11 @@ post '/sign_up' do
 	if @user.nil?
 			User.create(username: params[:username], password: params[:password], email: params[:email], zipcode: params[:zipcode] )
 			flash[:notice] = 'Congratulations!'		
+			@profile = Profile.create(email: params[:email], user_id: @user.id)
+			flash[:notice] = 'Congratulations!'
+			session[:user_id] = @user.id
+			session[:session_username] = @user.username
+			redirect '/success'
 	else
 		flash[:alert] = 'The username: #{params[:username] has been taken'
 		redirect '/sign_up_failed'
