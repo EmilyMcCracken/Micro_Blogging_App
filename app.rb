@@ -21,9 +21,7 @@ get '/sign_up' do
 	erb :sign_up
 end
 
-get '/profile' do
-	erb :profile
-end
+
 
 post '/login' do
 	@title = 'Login'
@@ -58,6 +56,14 @@ post '/sign_up' do
 		flash[:alert] = 'The username: #{params[:username] has been taken'
 		redirect '/sign_up_failed'
 	end
+end
+
+get '/sign_up_failed' do
+	erb :sign_up_failed
+end
+
+get '/success' do
+	erb :success
 end
 
 get '/sign_in_failed' do
@@ -103,4 +109,28 @@ post '/post' do
 	end
 	redirect back
 end
+
+
+
+get '/edit_profile' do
+	erb :edit_profile
+end
+
+post '/edit_profile' do
+	@title = 'Edit Your Profile'
+    @user
+	Profile.create(fname: params[:name], city: params[:city], birthday: params[:birthday], lname: params[:lname], user_id: "#{@User.id}")
+	erb :edit_profile
+end
+
+
+post '/profile' do
+	@title = 'Your Profile'
+	erb :profile
+end
+
+get '/profile' do
+	erb :profile
+end
+
 

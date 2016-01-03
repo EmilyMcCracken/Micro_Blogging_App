@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160102223514) do
+ActiveRecord::Schema.define(version: 20160103145953) do
 
   create_table "posts", force: :cascade do |t|
     t.string  "title"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160102223514) do
     t.string   "lname"
     t.string   "city"
     t.datetime "birthday"
+    t.integer  "user_id"
   end
 
   create_table "user_followers", force: :cascade do |t|
