@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="main_style.css">
-		<link rel="stylesheet" type="text/css" href="homepage.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 	</head>
 
 	<body>
-		<nav>
-				<a href="/"><button type="button">Homepage!</button></a>
-				<a href="/sign_up"><button type="button">Sign Up!</button></a>
-				<a href="/sign_in"><button type="button">Sign In!</button></a>
-				<a href="/profile"><button type="button">Your Profile!</button></a>
-				<a href="/sign_out"><button type="button">Sign Out!</button></a>
-				<%= yield%>
+		<header>
+			<img id="logo" src="./images/Dev_logo.png">
+			<nav>
+				<a href="/"><button class="nav_button" type="button">Home</button></a>
+				<a href="/sign_up"><button class="nav_button" type="button">Sign Up</button></a>
+				<a href="/sign_in"><button class="nav_button" type="button">Sign In</button></a>
+				<a href="/profile"><button class="nav_button" type="button">Profile</button></a>
+				<a href="/sign_out"><button class="nav_button" type="button">Sign Out</button></a>
+			</nav>
+		</header>
+			
+		<div id ="container">
+			<%= yield %>
+		</div>
+
+		<% if flash[:notice] %>
+			<%= flash[:notice] %>
+		<%end%>
 	</body>
+
 
 </html>
