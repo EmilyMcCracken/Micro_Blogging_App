@@ -47,7 +47,7 @@ post '/sign_up' do
 	@user = User.where(username: params[:username]).first
 	if @user.nil?
 			@user = User.create(username: params[:username], password: params[:password])
-			# @profile = Profile.create(email: params[:email], user_id: @user.id)
+			@profile = Profile.create(email: params[:email], user_id: @user.id)
 			flash[:notice] = 'Congratulations!'
 			session[:session_user_id] = @user.id
 			session[:session_username] = @user.username
