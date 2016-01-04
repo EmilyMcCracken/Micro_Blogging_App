@@ -140,15 +140,6 @@ get '/:username' do
 	erb :user
 end
 
-post '/post' do
-	@title = 'Your Profile'
-	if params[:post] != ""
-		Post.create(content: params[:post])
-	end
-	redirect back
-end
-
-
 def follow_method
   if current_user 
     current_user
