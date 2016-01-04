@@ -22,3 +22,14 @@
 				<form action="/follow_method" method="POST">
 					<button class="nav_button" type="submit">Follow</button>
 				</form>
+
+			<div id="recent_posts">
+			
+			<% @posts = @posts.reverse 
+				@posts.each do |post| %>
+					<h3><%= post.title %></h3>
+					<p><%= post.content %></p>
+				<% end %>
+			
+			</div>
+

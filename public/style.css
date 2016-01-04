@@ -166,6 +166,7 @@ form {
 	font-size: 20px;
 }
 
+<<<<<<< HEAD
 .dev_info {
 	text-align: center;
 	width: 400px;
@@ -177,3 +178,26 @@ form {
 	text-align: center;
 }
 
+=======
+#new_post {
+	border: 2px solid black;
+	width: 20%;
+	float: left;
+}
+
+#recent_posts {
+	border: 2px solid black;
+	float: left;
+	background-color: #ffffff;
+	padding: 10px;
+	width: 60%;
+}
+
+
+
+
+
+
+
+
+>>>>>>> 380881590c9a371b214f65a952b78b40523e32da

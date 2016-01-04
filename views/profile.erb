@@ -29,6 +29,29 @@
 				<a href="/delete_profile"><button class="nav_button" type="button">Delete Your Profile</button></a>
 			</div>
 
+		<div id="new_post">
+			<form id="post_form" method="post" action="/post">
+				<label id="post_label" for="post">Write a Post!</label>
+				<br>
+				<br>
+				<textarea name="post"></textarea>
+				<br>
+				<input class="button" type="submit" value="Post">
+			</form>
+		</div>
+
+		<div id="recent_posts">
+
+			<% @posts = @posts.reverse 
+				@posts.each do |post| %>
+					<h3><%= post.title %></h3>
+					<p><%= post.content %></p>
+				<% end %>
+			
+		</div>
+
+
+
 		</body>
 </html>
 
