@@ -123,22 +123,39 @@ post '/delete_profile' do
 end
 
 get '/users' do
-	@title = 'Users'
 	@users = User.all
 	erb :users
 end
 
+get '/user' do
+	@users = User.all
+	erb :user
+end
+
 get '/:username' do
 	@user = User.find_by(username: params[:username])
-	# @followers = Follow.where(user_id: @user.id)
 	@profile = Profile.find_by(user_id: @user.id)
 	@posts = Post.where(user_id: @user.id)
-	# @follow = false
-	# @followers.each do |follower|
-	# 	if follower.follower_id == session[:session_user_id]
-	# 		@follow = true
-	# 	end 
 	erb :user
+end
+
+
+def follow_method
+  if current_user 
+    current_user
+    User.find(params[:followID]).followers.push(User.find(@user.id))
+  end
+end
+
+post '/follow_method' do
+  follow_method
+  current_user
+  erb :profile
+end
+
+get '/follow_user' do
+  current_user
+  erb :users
 end
 
 

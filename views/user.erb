@@ -2,17 +2,23 @@
 				<br>
 				<br>
 				<br>
-				<br>
-				<br>
-			<div class="profile"> 
+			<h1 id="user_profile_header">User Profile:</h1>
+				<div class="profile"> 
+					<img class="default_photo" src="images/profile.jpg" alt="default_photo">
+					<br>
+					<p>Username: <%= @user.username %></p>
+					<p>User ID: <%= @user.id %></p>
+					<br>
+					<br>
+					<br>
+					<p>Email: <%= @user.email %></p>
+					<p>Zipcode: <%= @user.zipcode %></p>
+					<p>First Name: <%= @user.profile.fname %></p>
+					<p>Last Name: <%= @user.profile.lname %></p>
+					<p>City: <%= @user.profile.city %></p>
+					<p>Birthday: <%= @user.profile.birthday %></p>
+				</div>
 
-				<p>Profile:</p>
-				<p>User ID: <%= @user.id %></p>
-				<p>Username: <%= @user.username %></p>
-				<p>Email: <%= @user.email %></p>
-				<p>Zipcode: <%= @user.zipcode %></p>
-				<p>First Name: <%= @user.profile.fname %></p>
-				<p>Last Name: <%= @user.profile.lname %></p>
-				<p>City: <%= @user.profile.city %></p>
-				<p>Birthday: <%= @user.profile.birthday %></p>
-			</div>
+				<form action="/follow_method" method="POST">
+					<button class="nav_button" type="submit">Follow</button>
+				</form>

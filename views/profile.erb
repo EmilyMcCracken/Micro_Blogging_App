@@ -7,22 +7,22 @@
 			<br>
 				<br>
 				<br>
+				<p class="profile_header"> Your Profile Page </p>
+				<div class="profile"> 
+					<img class="default_photo" src="images/profile.jpg" alt="default_photo">
 				<br>
+				<div class="user_info_top">
+					<p>Username: <%= @current_user.username %></p>
+					<p>User ID: <%= @current_user.id %></p>
+				</div>
 				<br>
-				<br>
-				<br>
-			<div class="profile"> 
-				
-				<p class="profile_header">Your Profile:</p>
-				<p>User ID: <%= @current_user.id %></p>
-				<p>Username: <%= @current_user.username %></p>
-				<p>Email: <%= @current_user.email %></p>
-				<p>Zipcode: <%= @current_user.zipcode %></p>
-				<p>First Name: <%= @current_user.profile.fname %></p>
-				<p>Last Name: <%= @current_user.profile.lname %></p>
-				<p>City: <%= @current_user.profile.city %></p>
-				<p>Birthday: <%= @current_user.profile.birthday %></p>
-			</div>
+					<p>Email: <%= @current_user.email %></p>
+					<p>Zipcode: <%= @current_user.zipcode %></p>
+					<p>First Name: <%= @current_user.profile.fname %></p>
+					<p>Last Name: <%= @current_user.profile.lname %></p>
+					<p>City: <%= @current_user.profile.city %></p>
+					<p>Birthday: <%= @current_user.profile.birthday %></p>
+				</div>
 
 			<div class="profile_options">
 				<a href="/edit_profile"><button class="nav_button" type="button">Edit Your Profile</button></a>

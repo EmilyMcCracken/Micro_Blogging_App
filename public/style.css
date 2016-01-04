@@ -116,25 +116,27 @@ form {
 #users_header {
 	border: 5px #ff5722 solid;
 	font-size: 40px; 
-	width: 200px;
+	height: 50px;
+	width: 20%;
 	text-align: center;
-	margin-left: 500px;
+	margin-left: 39%;
 }
 
 #users_page {
 	font-size: 20px;
 	text-align: center;
-	margin-left: 30px;
+	margin-left: 20px;
+	text-decoration: none;
 }
 
 #users_list {
 	text-decoration: none;
 	padding: 10px;
-	margin: 20px;
+	text-align: center;
 }
 
 .profile {
-	border: solid #ff5722 4px;
+	border: double #ff5722 10px;
 	width: 30%;
 	background-color: rgba(96, 125, 139, 0.6);
 	margin-left: 35%;
@@ -143,6 +145,35 @@ form {
 }
 
 .profile_header {
+	font-size: 22px;
+	text-align: center;
+	margin-left: 42%;
+	color: #ffffff;
+	border: solid #ff5722 4px;
+	background-color: #607d8b;
+	width: 200px;
+	padding: 5px;
+}
+
+.default_photo {
+	float: left;
+	width: 180px;
+	margin: 10px;
+	border-radius: 25px;
+}
+
+.user_info_top {
 	font-size: 20px;
+}
+
+.dev_info {
+	text-align: center;
+	width: 400px;
+	margin-left: 34%;
+	box-shadow: 10px 10px 10px 10px #888888;
+}
+
+#user_profile_header {
+	text-align: center;
 }
 
