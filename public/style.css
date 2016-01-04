@@ -112,3 +112,8 @@ form {
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
 }
+
+#users_page {
+	font-size: 20px;
+}
+

@@ -116,14 +116,29 @@ post '/new_profile' do
   redirect '/profile'
 end
 
-get '/delete_profile' do
-	erb :home
-end
-
 post '/delete_profile' do
 	current_user
 	current_user.destroy
 	erb :home
+end
+
+get '/users' do
+	@title = 'Users'
+	@users = User.all
+	erb :users
+end
+
+get '/:username' do
+	@user = User.find_by(username: params[:username])
+	# @followers = Follow.where(user_id: @user.id)
+	@profile = Profile.find_by(user_id: @user.id)
+	@posts = Post.where(user_id: @user.id)
+	# @follow = false
+	# @followers.each do |follower|
+	# 	if follower.follower_id == session[:session_user_id]
+	# 		@follow = true
+	# 	end 
+	erb :user
 end
 
 

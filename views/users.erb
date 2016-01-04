@@ -1,1 +1,15 @@
-users.erb
+<div id="users_page">
+	<br>
+	<br>
+	<br>
+	<h1>Users</h1>
+
+	<% @users.each do |user| %>
+		<% if user.username != session[:session_user_name] %>
+			<a class="users_list" href="/<%= user.username %>">
+				<%= user.username %>
+			</a>
+			<br />
+		<% end %>
+	<% end %>
+</div>

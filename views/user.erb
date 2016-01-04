@@ -1,1 +1,16 @@
-user.erb
+			<div class="profile"> 
+				<br>
+				<br>
+				<br>
+				<br>
+				<p>Profile:</p>
+				<br>
+				<p>User ID: <%= @user.id %></p>
+				<p>Username: <%= @user.username %></p>
+				<p>Email: <%= @user.email %></p>
+				<p>Zipcode: <%= @user.zipcode %></p>
+				<p>First Name: <%= @user.profile.fname %></p>
+				<p>Last Name: <%= @user.profile.lname %></p>
+				<p>City: <%= @user.profile.city %></p>
+				<p>Birthday: <%= @user.profile.birthday %></p>
+			</div>
