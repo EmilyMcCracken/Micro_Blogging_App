@@ -17,6 +17,7 @@ end
 # routes
 
 get '/' do
+	@posts = Post.all
 	erb :home
 end
 
@@ -165,7 +166,6 @@ get '/follow_user' do
   current_user
   erb :users
 end
-
 
 
 
