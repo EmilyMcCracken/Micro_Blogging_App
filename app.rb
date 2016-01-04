@@ -80,12 +80,6 @@ get '/sign_out' do
 	erb :home
 end
 
-post '/post' do
-	if params[:post] != ""
-		current_user.posts << Post.create(content: params[:post])
-	end
-	redirect '/profile'
-end
 
 get '/profile' do
 	current_user
@@ -138,6 +132,14 @@ get '/:username' do
 	@profile = Profile.find_by(user_id: @user.id)
 	@posts = Post.where(user_id: @user.id)
 	erb :user
+end
+
+post '/post' do
+	current_user
+	if params[:post] != ""
+		current_user.posts << Post.create(content: params[:post])
+	end
+	redirect '/profile'
 end
 
 def follow_method
