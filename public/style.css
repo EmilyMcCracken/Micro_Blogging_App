@@ -146,3 +146,21 @@ form {
 	font-size: 20px;
 }
 
+#new_post {
+	border: 2px solid black;
+	width: 20%;
+	float: left;
+}
+
+#recent_posts {
+	border: 2px solid black;
+	float: left;
+}
+
+
+
+
+
+
+
+

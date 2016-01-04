@@ -89,6 +89,7 @@ end
 
 get '/profile' do
 	current_user
+	@posts = Post.where(user_id: session[:session_user_id])
 	erb :profile
 end
 
@@ -139,6 +140,14 @@ get '/:username' do
 	# 		@follow = true
 	# 	end 
 	erb :user
+end
+
+post '/post' do
+	@title = 'Your Profile'
+	if params[:post] != ""
+		Post.create(user_id: session[:session_user_id], title: params[:post], content: params[:post])
+	end
+	redirect back
 end
 
 
