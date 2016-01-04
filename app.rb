@@ -74,7 +74,6 @@ post '/login_success' do
 	erb :success
 end
 
-
 get '/sign_out' do
 	session.clear
 	erb :home
@@ -82,14 +81,14 @@ end
 
 post '/post' do
 	if params[:post] != ""
-		Post.create(user_id: session[:session_user_id], content: params[:post])
+		current_user.posts << Post.create(content: params[:post])
 	end
-	redirect back
+	redirect '/profile'
 end
 
 get '/profile' do
 	current_user
-	@posts = Post.where(user_id: session[:session_user_id])
+	@posts = current_user.posts
 	erb :profile
 end
 
@@ -145,7 +144,7 @@ end
 post '/post' do
 	@title = 'Your Profile'
 	if params[:post] != ""
-		Post.create(user_id: session[:session_user_id], title: params[:post], content: params[:post])
+		Post.create(content: params[:post])
 	end
 	redirect back
 end

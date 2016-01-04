@@ -8,12 +8,6 @@
 	</div>
 	<div class="feed">
 		<h1 class="feedheader">Here is what people are saying...</h1>
-		<% all_posts = [] %>
 
-		<% all_posts.each do |post| %>
-			<h3>Post</h3>
-		 	<p><%= post.message %></p>
-		 	<p><%= User.find(post.user_id).username %></p>
-		<% end %>
 	</div>
 </div>
