@@ -155,6 +155,9 @@ form {
 #recent_posts {
 	border: 2px solid black;
 	float: left;
+	background-color: #ffffff;
+	padding: 10px;
+	width: 60%;
 }
 
 

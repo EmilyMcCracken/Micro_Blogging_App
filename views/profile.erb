@@ -34,14 +34,14 @@
 				<label id="post_label" for="post">Write a Post!</label>
 				<br>
 				<br>
-				Post: <textarea name="post"></textarea>
+				<textarea name="post"></textarea>
 				<br>
 				<input class="button" type="submit" value="Post">
 			</form>
 		</div>
 
 		<div id="recent_posts">
-			
+
 			<% @posts = @posts.reverse 
 				@posts.each do |post| %>
 					<h3><%= post.title %></h3>
