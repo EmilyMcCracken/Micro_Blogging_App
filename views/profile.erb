@@ -1,10 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> User Profile </title>
+	</head>
+		<body>
+			<div class="profile"> 
+				<br>
+				<br>
+				<br>
+				<br>
+				<p>Your Profile:</p>
+				<br>
+				<p>User ID: <%= @current_user.id %></p>
+				<p>Username: <%= @current_user.username %></p>
+				<p>Email: <%= @current_user.email %></p>
+				<p>Zipcode: <%= @current_user.zipcode %></p>
+				<p>First Name: <%= @current_user.profile.fname %></p>
+				<p>Last Name: <%= @current_user.profile.lname %></p>
+				<p>City: <%= @current_user.profile.city %></p>
+				<p>Birthday: <%= @current_user.profile.birthday %></p>
+			</div>
 
-	<div class="profile"> 
-		<p>Your Profile:</p>
-		<p>Username: <%= @current_user.username %></p>
-		<p>Zipcode : <%= @current_user.zipcode %></p>
-		<p>Zipcode : <%= @current_user.profile.fname %></p>	
-	</div>
+			<div class="profile_options">
+				<a href="/edit_profile"><button class="nav_button" type="button">Edit Your Profile</button></a>
+				<a href="/delete_profile"><button class="nav_button" type="button">Delete Your Profile</button></a>
+			</div>
+
+		</body>
+</html>
 
 
 

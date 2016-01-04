@@ -1,28 +1,20 @@
 require 'sinatra' 
 require 'sinatra/activerecord'
 require 'sinatra/flash'
-
-enable :sessions
-
-set :database, "sqlite3:micro_blog_db.sqlite3"
-
 require './models'
 
-# define current user and call it, so it can be used going forward for each session
+set :database, "sqlite3:micro_blog_db.sqlite3"
+enable :sessions
 
-def current_user
-  if session[:user_id]
-    User.find(session[:user_id])  
-  else
-    nil
-  end
-end
+# define current user
 
 def current_user
 	if session[:user_id]
 		@current_user = User.find(session[:user_id])
 	end
 end
+
+# routes
 
 get '/' do
 	erb :home
@@ -32,20 +24,19 @@ get '/sign_in' do
 	erb :sign_in
 end
 
-get '/sign_up' do
-	erb :sign_up
-end
-
-post '/login' do
+post '/sign_in' do
 	@user = User.where(username: params[:username]).first
 		if @user.password == params[:password]
-			flash[:notice] = 'Congratulations!'
 			session[:user_id] = @user.id
 			current_user
-			redirect '/profile'
+			erb :profile
 		else
 			redirect '/sign_in_failed'
 		end
+end
+
+get '/sign_up' do
+	erb :sign_up
 end
 
 
@@ -53,17 +44,18 @@ post '/sign_up' do
 	@user = User.where(username: params[:username]).first
 	if @user.nil?
 		@user = User.create(username: params[:username], password: params[:password], email: params[:email], zipcode: params[:zipcode] )
-		flash[:notice] = 'Congratulations!'	
+		flash[:notice] = 'Congratulations! You have successfully signed up and edited your profile.'	
 		@profile = Profile.create(fname: params[:fname], city: params[:city], birthday: params[:birthday], lname: params[:lname])
 		@user.profile = @profile
-		redirect '/edit_profile'
+		@user.save
+		erb :edit_profile
 	else
 		flash[:alert] = 'The username: #{params[:username] has been taken'
 		redirect '/sign_up_failed'
 	end
 		session[:user_id] = @user.id
 		current_user
-		redirect '/edit_profile'
+		erb :edit_profile
 end
 
 get '/sign_up_failed' do
@@ -96,13 +88,10 @@ post '/post' do
 end
 
 get '/profile' do
-	erb :profile
-end
-
-post '/profile' do
 	current_user
 	erb :profile
 end
+
 
 get '/edit_profile' do
 	erb :edit_profile
@@ -112,6 +101,29 @@ post '/edit_profile' do
     current_user
 	current_user.profile.update(fname:params[:fname], lname:params[:lname], city:params[:city], birthday:params[:birthday])
 	erb :edit_profile
+end
+
+post '/new_profile' do
+  current_user
+  params.each do |type, value|
+    if value == ""
+      params.except!(type)
+      puts params
+    else
+    @current_user.profile.update({type => value})
+    end
+  end
+  redirect '/profile'
+end
+
+get '/delete_profile' do
+	erb :home
+end
+
+post '/delete_profile' do
+	current_user
+	current_user.destroy
+	erb :home
 end
 
 
