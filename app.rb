@@ -29,7 +29,7 @@ post '/sign_in' do
 		if @user.password == params[:password]
 			session[:user_id] = @user.id
 			current_user
-			erb :profile
+			redirect '/profile'
 		else
 			redirect '/sign_in_failed'
 		end
