@@ -79,12 +79,6 @@ get '/sign_out' do
 	erb :home
 end
 
-post '/post' do
-	if params[:post] != ""
-		current_user.posts << Post.create(content: params[:post])
-	end
-	redirect '/profile'
-end
 
 get '/profile' do
 	current_user
@@ -139,12 +133,13 @@ get '/:username' do
 	erb :user
 end
 
+
 post '/post' do
-	@title = 'Your Profile'
+	current_user
 	if params[:post] != ""
-		Post.create(content: params[:post])
+		current_user.posts << Post.create(content: params[:post])
 	end
-	redirect back
+	redirect '/profile'
 end
 
 
