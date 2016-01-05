@@ -8,10 +8,9 @@
 	</div>
 	<div class="feed">
 		<h1 class="feedheader">Here is what people are saying...</h1>
-
-		<% @posts = @posts.reverse 
-		   @posts.each do |post| %>
-		    <p><%= post.content %></p>
+		  <% @posts.each do |post| %>
+		   	<p id="post_name"> <%= post.user.username if post.user %></p>
+		    <p id="post_display"> <%= post.content %></p>
 		<% end %>
 
 	</div>

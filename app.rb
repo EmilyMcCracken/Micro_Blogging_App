@@ -17,7 +17,7 @@ end
 # routes
 
 get '/' do
-	@posts = Post.all
+	@posts = Post.order(id: :desc).take(10)
 	erb :home
 end
 
@@ -77,7 +77,7 @@ end
 
 get '/sign_out' do
 	session.clear
-	erb :home
+	erb :sign_in
 end
 
 

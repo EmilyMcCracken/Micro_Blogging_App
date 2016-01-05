@@ -67,6 +67,8 @@ header {
 	padding-left: 100px;
 	padding-right: 100px;
 	padding-bottom: 100px;
+	background-color: #ff5722;
+	color: white;
 }
 
 #recent_posts {
@@ -76,12 +78,11 @@ header {
 }
 
 #new_post {
-	margin-right: 30%;
+	text-align: center;
+	margin-right: 23%;
 }
 
 #new_post_header {
-	text-align: center;
-	margin-left: 46%;
 }
 
 #dev {
@@ -186,5 +187,21 @@ form {
 
 #user_profile_header {
 	text-align: center;
+}
+
+#post_name {
+	font-size: 20px
+}
+
+#post_display {
+	border: solid #607d8b 4px ;
+	padding: 10px;
+	width: 700px;
+	background-color: white;
+	color: #607d8b;
+}
+
+textarea {
+	width: 300px;
 }
 
